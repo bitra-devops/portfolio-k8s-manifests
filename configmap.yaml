@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: portfoliopage-configmap
+data:
+  index: |-
+     {{ .Files.Get "/home/bitra/work/landingpage-k8s-project/manifests/index.html" | nindent 2 }}

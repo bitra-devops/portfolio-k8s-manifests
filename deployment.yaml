@@ -1,0 +1,26 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portfolipage-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ppage-nodejs
+  template:
+    metadata:
+      labels:
+        app: ppage-nodejs
+    spec:
+      containers:
+        - name: ppage-nodejs-app
+          image: santoshbitradocker/my-portfolio-landingpage:v2
+          ports:
+            - containerPort: 3000
+          env:
+            - name: INDEX
+              valueFrom:
+                configMapKeyRef:
+                  name: portfoliopage-configmap
+                  key: index
